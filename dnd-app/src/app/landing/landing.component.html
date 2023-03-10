@@ -1,0 +1,101 @@
+<ng-container *ngIf="content == 'o'; else defualt_info">
+  <ng-container *ngFor="let content of Content">
+    <ng-container *ngIf="type === content.if">
+      <mat-toolbar>
+        <button
+          mat-fab
+          extended
+          *ngFor="let toolbtns of content.toolbar"
+          routerLink="{{ toolbtns.link }}"
+          color="{{ toolbtns.color }}"
+        >
+          <fa-icon [icon]="toolbtns.icon"></fa-icon>
+          {{ toolbtns.title }}
+        </button>
+      </mat-toolbar>
+
+      <h2>{{ content.title }}</h2>
+      <div class="row">
+        <ng-container *ngFor="let cards of content.cardFor">
+          <div
+            [ngClass]="{
+              'col-3': currentScreenSize === 'XLarge',
+              'col-4':
+                currentScreenSize === 'Large' || currentScreenSize === 'Medium',
+              'col-6': currentScreenSize === 'Small',
+              'col-12': currentScreenSize === 'XSmall'
+            }"
+          >
+            <mat-card>
+              <mat-card-header>
+                <fa-icon
+                  mat-card-avatar
+                  [icon]="cards.icon"
+                  size="2xl"
+                ></fa-icon>
+                <mat-card-title>{{ cards.title }} </mat-card-title>
+                <mat-card-subtitle>{{ cards.source }}</mat-card-subtitle>
+              </mat-card-header>
+              <hr />
+              <mat-card-content>
+                <mat-card-subtitle>
+                  {{ cards.classtype }}
+                </mat-card-subtitle>
+                <div class="row">
+                  <div [innerHTML]="cards.desc"></div>
+                  <div [innerHTML]="cards.desc2"></div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <ng-container *ngFor="let btns of cards.buttons">
+                  <button
+                    mat-raised-button
+                    color="{{ btns.color }}"
+                    routerLink="{{ btns.link }}"
+                  >
+                    {{ btns.title }}
+                  </button>
+                </ng-container>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #defualt_info>
+  <div class="row">
+    <div
+      *ngFor="let dcards of defualt"
+      class="my-2"
+      [ngClass]="{
+        'col-3': currentScreenSize === 'XLarge',
+        'col-4':
+          currentScreenSize === 'Large' || currentScreenSize === 'Medium',
+        'col-6': currentScreenSize === 'Small',
+        'col-12': currentScreenSize === 'XSmall'
+      }"
+    >
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ dcards.title }}</mat-card-title>
+        </mat-card-header>
+        <hr />
+        <mat-card-content>{{ dcards.desc }}</mat-card-content>
+        <mat-card-actions>
+          <div>
+            <button
+              *ngFor="let btns of dcards.btns"
+              mat-raised-button
+              color="{{ btns.color }}"
+              [routerLink]="['../info', btns.content, btns.type]"
+            >
+              {{ btns.title }}
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

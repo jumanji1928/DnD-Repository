@@ -1,0 +1,30 @@
+<div class="row m-2">
+  <div
+    *ngFor="let cards of HomeCards"
+    [ngClass]="{
+      'col-3': currentScreenSize === 'XLarge',
+      'col-4': currentScreenSize === 'Large' || currentScreenSize === 'Medium',
+      'col-6': currentScreenSize === 'Small',
+      'col-12': currentScreenSize === 'XSmall'
+    }"
+  >
+    <mat-card>
+      <mat-card-header>{{ cards.title }}</mat-card-header>
+      <mat-card-content>
+        {{ cards.desc }}
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <button
+            mat-raised-button
+            *ngFor="let btns of cards.btns"
+            color="primary"
+            [routerLink]="['../info', btns.content, btns.type]"
+          >
+            {{ btns.title }}
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

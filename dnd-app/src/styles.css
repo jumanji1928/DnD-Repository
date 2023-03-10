@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: unset;
+}
+
+button {
+  margin: 10px;
+}
+
+mat-toolbar {
+  z-index: 2 !important;
+}
